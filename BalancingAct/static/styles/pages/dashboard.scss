@@ -1,0 +1,170 @@
+#dashboard {
+    text-align: center;
+
+    .category {
+        border-radius: 5px;
+        font-size: 24px;
+        font-family: $header-font;
+        text-align: left;
+        margin-bottom: 20px;
+        padding-left: 0;
+        padding-right: 0;
+
+        .header {
+            padding: 5px 15px;
+            border: 2px solid $sea-dark;
+            border-radius: 5px;
+
+            &:hover {
+                background-color: $sea;
+                cursor: pointer;
+                color: white;
+            }
+
+            &.expanded {
+                color: white;
+                background-color: $sea-dark;
+                border-bottom: 1px solid $sea-dark;
+            }
+
+            &.border-fix {
+                border-bottom-right-radius: 0;
+            }
+        }
+
+        .experience-container {
+            margin: 0 0 0 40px;
+            font-size: 18px;
+
+            .empty-experience {
+                margin-top: 5px;
+            }
+
+            .experience {
+                border: 1px solid $sea-dark;
+                border-top: none;
+                padding: 5px 15px;
+
+
+                &:last-of-type {
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: $sea;
+                    color: white;
+                }
+
+                .name {
+                    float: left;
+                    padding-top: 5px;
+                }
+
+                .date {
+                    float: right;
+                    padding-top: 5px;
+                }
+
+                .icon-trash {
+                    float: right;
+                    margin-left: 20px;
+                }
+            }
+
+            .add-experience {
+                float: right;
+                margin-bottom: 10px;
+                font-size: 1.1em;
+
+                &.top-margin {
+                    margin-top: 5px;
+                }
+            }
+        }
+
+
+        .add-experience {
+            font-size: 0.9em;
+        }
+
+    }
+
+    #experienceModal {
+        .category-tag-attached, .category-tag {
+            padding: 5px 10px;
+            display: inline-block;
+            margin: 0 5px 5px 0;
+            color: white;
+            border-radius: 4px;
+            float: left;
+            background-color: $sea-dark;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            /*&:nth-of-type(3n - 2) {
+                background-color: $sea;
+            }
+            &:nth-of-type(3n - 1) {
+                background-color: $sea-mid;
+            }
+            &:nth-of-type(3n) {
+                background-color: $sea-dark;
+            }*/
+
+            .icon {
+                color: $red-dark;
+            }
+        }
+
+        .category-tag {
+            padding: 5px 10px;
+            display: inline-block;
+            margin: 0 5px 5px 0;
+            color: white;
+            border-radius: 4px;
+            float: left;
+            background-color: $sea;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            .icon {
+                color: $red-dark;
+            }
+        }
+
+    }
+
+    .modal {
+        .glyphicon-info-sign {
+            color: $sea-mid;
+            cursor: pointer;
+        }         
+    }      
+    #confirmationModal {
+       position: absolute;
+       left: 5%;
+       top: 50%; 
+       
+       margin-top: -150px;
+
+       .buttons {
+            margin-top: 10px;
+            margin-bottom: 10px;
+       }
+
+       .proceed {
+            background-color: green;
+            width: 100px;
+       }
+
+       .cancel {
+            width: 100px;
+       }
+    }    
+}

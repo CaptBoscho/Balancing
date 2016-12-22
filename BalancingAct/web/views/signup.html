@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row">
+        <div id="signup">
+            <div class="col-md-6 col-md-offset-3 infoTable">
+                <div class="header">
+                    Sign up
+                </div>
+                <div class="info">
+                    <form ng-submit="signup($event)">
+                        <div class="alert alert-danger" ng-if="error">
+                            {{ error.message }}
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="emailLabel">Email</span>
+                            <input type="text" class="form-control" id="email" aria-describedby="emailLabel" placeholder="Email" ng-model="email"/>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="passwordLabel">Password</span>
+                            <input type="password" class="form-control" id="password" aria-describedby="passwordLabel" placeholder="Password" ng-model="password"/>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="passwordConfirmLabel">Confirm Password</span>
+                            <input type="password" class="form-control" id="passwordConfirm" aria-describedby="passwordConfirmLabel" placeholder="Password" ng-model="passwordConfirm"/>
+                        </div>
+                        <div class="input-group">
+                            <input type="submit" class="btn btn-default login" value="Sign up" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

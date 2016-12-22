@@ -1,0 +1,205 @@
+<div class="page container-fluid">
+
+    <div class="row">
+        <div id="dashboard" class="col-xs-12">
+            <div ng-repeat="category in categories" class="col-md-10 col-md-offset-1 category"
+                ng-click="toggleCategory(category)">
+                <div class="header" ng-class="{'expanded':category.expanded, 'border-fix': (category.expanded && hasExperiences(category)) };">
+                    {{category.name}}
+                    <span ng-if="!category.expanded">
+                      <span class="glyphicon glyphicon-menu-right" style="float:right"></span>
+                    </span>
+                    <span ng-if="category.expanded">
+                      <span class="glyphicon glyphicon-menu-down" style="float:right"></span>
+                    </span>
+                </div>
+                <div ng-if="category.expanded" class="experience-container" ng-click="stopPropagation($event)">
+                    <div ng-if="hasExperiences(category)">
+                        <div ng-repeat="experience in category.experiences"
+                            class="col-md-12 experience" ng-click="editExperience(experience)">
+                            <div class="name">{{experience.name}}</div>
+                            <div class="icon-trash" style="float: right">
+                                <a ng-click="stopPropagation($event); confirmModal(experience)" class="btn btn-info btn-lg">
+                                  <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </div>
+                            <div class="date">{{experience.date}}</div>
+                        </div>
+                        <input type="button" class="btn btn-default add-experience top-margin" value="Add an Experience" ng-click="addExperience(category)" />
+                    </div>
+
+                    <div ng-if="!hasExperiences(category)" class="empty-experience">
+                        No experiences added yet
+                        <input type="button" class="btn btn-default add-experience" value="Add an Experience" ng-click="addExperience(category)" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1 category">
+                <input type="button" class="btn btn-default add-experience" value="Add a Category" ng-click="addCategory()" />
+                <input type="button" class="btn btn-default add-experience" value="Add an Experience" ng-click="openExperienceModal()" />
+            </div>
+
+            <div class="modal fade" id="experienceModal" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">{{modalTitle}}</h4>
+                        </div>
+                        <form ng-submit="submitExperience($event)">
+                            <div class="modal-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="modalName">Title:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="modalName" ng-model="currentExperience.name"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="modalDate">Date:</label>
+                                        <div class="col-sm-10">
+                                            <input type='text' class="form-control" id="modalDate" ng-model="currentExperience.date"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="categories">Categories:</label>
+                                        <div id="categories" class="col-sm-10">
+                                            <div class="row">
+                                                <div ng-repeat="category in categories">
+                                                    <div ng-if="category.attached" class="category-tag-attached" ng-click="toggleExperienceCategory(category)">{{category.name}}
+                                                        <span class="glyphicon glyphicon-check icon"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div ng-repeat="category in categories" >
+                                                    <div class="category-tag" ng-if="!category.attached" ng-click="toggleExperienceCategory(category)">
+                                                        {{category.name}}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-2 col-sm-offset-2">
+                                            <input type="button" class="btn btn-default add-experience" value="Add a Category" ng-click="addCategory()" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12" style="text-align: left">
+                                            <span class="glyphicon glyphicon-info-sign" class="tooltip" data-toggle="tooltip"
+                                                title="Set the context for your story. For example,
+                                                        'We were due to be delivering a presentation to a group of 30 interested industry players on our
+                                                        new product and Stuart, the guy due to deliver it, got stuck on a train from Birmingham.'">
+                                            </span>
+                                            <label class="control-label" for="situation">Situation:</label>
+                                            <textarea rows="4" class="form-control" id="situation" ng-model="currentExperience.situation"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12" style="text-align: left">
+                                            <span class="glyphicon glyphicon-info-sign" class="tooltip" data-toggle="tooltip"
+                                                title="What was required of you. For example,
+                                                        'It was my responsibility to find an alternative so it didn't reflect badly on the company
+                                                        and we didn't waste the opportunity.'">
+                                            </span>
+                                            <label class="control-label" for="task">Task:</label>
+                                            <textarea rows="4" class="form-control" id="task" ng-model="currentExperience.task"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12" style="text-align: left">
+                                            <span class="glyphicon glyphicon-info-sign" class="tooltip" data-toggle="tooltip"
+                                                title="What you actually did. For example,
+                                                        'I spoke to the event organisers to find out if they could change the running order.
+                                                        They agreed so we bought ourselves some time. I contacted Susan, another member of the team,
+                                                        who at a push could step in. She agreed to drop what she was doing and head to the event.'">
+                                            </span>
+                                            <label class="control-label" for="action" >Action:</label>
+                                            <textarea rows="4" class="form-control" id="action" ng-model="currentExperience.action"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12" style="text-align: left">
+                                            <span class="glyphicon glyphicon-info-sign" class="tooltip" data-toggle="tooltip"
+                                                title="How well the situation played out. For example,
+                                                        'Stuart didn't make the meeting on time but we explained the problem to the delegates and Susan's
+                                                        presentation went well - a bit rough around the edges but it was warmly received. Stuart managed
+                                                        to get there for the last 15 minutes to answer questions. As a result we gained some good contacts,
+                                                        at least two of which we converted into paying clients.'">
+                                            </span>
+                                            <label class="control-label" for="results">Results:</label>
+                                            <textarea rows="4" class="form-control" id="results" ng-model="currentExperience.results"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input ng-if="modalTitle == 'Edit Experience'" type="button" class="btn btn-default delete"
+                                    value="Delete Experience" ng-click="deleteExperience()"/>
+                                <input type="submit" class="btn btn-primary" value="Save changes"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <div class="modal fade" id="categoryModal" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">{{categoryTitle}}</h4>
+                        </div>
+                        <form class="no-margin" ng-submit="submitCategory(newCategoryName)">
+                            <div class="modal-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3" for="categoryName">Category Title:</label>
+                                        <div class="col-sm-9 row">
+                                            <input type='text' class="form-control col-sm-8" id="newCategoryName"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-primary"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+
+        <!-- <div class="modal fade" id="starInfoModal" role="dialog">
+           <div class="modal-dialog" role="document">
+              <div class ="modal-content">
+                 <div class = "modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{starTitle}}</h4>
+                 </div>
+                 {{starInformation}}
+              </div>
+           </div>
+        </div> -->
+
+        <div class="modal fade" id="confirmationModal" role="dialog">
+           <div class="modal-dialog" role="document">
+              <div class ="modal-content">
+                 <div class = "modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Are you sure you want to delete this experience?</h4>
+                 </div>
+                 <div class="buttons row">
+                    <div class="col-md-3 col-md-offset-3">
+                        <button class="btn btn-default proceed" ng-click="deleteExperience('yes')">Yes</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-default cancel" data-dismiss="modal">No</button>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        </div>
+    </div>
+</div>

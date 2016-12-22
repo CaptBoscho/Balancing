@@ -1,0 +1,13 @@
+//constants
+@import 'constants/colors';
+
+//globals
+@import 'globals/navbar';
+@import 'globals/bootstrapOverrides';
+@import 'globals/globals';
+
+//pages
+@import 'pages/dashboard';
+@import 'pages/home';
+@import 'pages/login';
+@import 'pages/signup';

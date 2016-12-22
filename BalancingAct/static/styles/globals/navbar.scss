@@ -1,0 +1,32 @@
+/* region NavBar */
+.navbar {
+	background-color: $sea;
+	border: none;
+	border-radius: 0;
+
+	.logo {
+	    font-size: 28px;
+		color: white;
+
+	    &:hover {
+			cursor: pointer;
+			border-radius: 3px;
+		}
+	}
+
+	.nav {
+		span{
+			font-size: 20;
+			color: white;
+			padding-top: 10px;
+			display: inline-block;
+
+			&:hover {
+				text-decoration: none;
+				cursor: pointer;
+				color: $smoke;
+			}
+		}
+	}
+}
+/* endRegion */

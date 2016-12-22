@@ -1,0 +1,35 @@
+{
+  "name": "InterviewIn",
+  "version": "0.1.0",
+  "description": "Default",
+  "author": "Curtis Merrell",
+  "contributors": [
+    "Aaron Monson"
+  ],
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/csmerrell/GoodGameReport"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "4.13.3",
+    "jsonwebtoken": "^7.1.9",
+    "mongodb": "2.1.21",
+    "monk": "0.7.1",
+    "monkii": "^1.2.0",
+    "node-sass": "^3.10.0",
+    "node-sass-import": "^1.0.5",
+    "node-sass-middleware": "^0.9.8",
+    "scrypt-for-humans": "^2.0.5"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}

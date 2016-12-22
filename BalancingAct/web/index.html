@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<title>InterviewIn</title>
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="includes/jquery-ui.min.css">
+		<link rel="stylesheet" href="styles/compiled.css">
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+		<script src="includes/moment.min.js"></script>
+		<script src="includes/jquery-ui.min.js"></script>
+
+		<script src="includes/date.js"></script>
+
+		<script>
+			var app = angular.module('interviewIn', ['ngRoute']);
+
+			app.config(function($routeProvider) {
+				$routeProvider
+					.when('/', {
+						templateUrl: '/views/home.html',
+						controller: 'HomeCtrl',
+						caseInsensitiveMatch: true
+					})
+					.when('/dashboard', {
+						templateUrl: '/views/dashboard.html',
+						controller: 'DashboardCtrl',
+						caseInsensitiveMatch: true
+					})
+					.when('/login', {
+						templateUrl: '/views/login.html',
+						controller: 'LoginCtrl',
+						caseInsensitiveMatch: true
+					})
+					.when('/signup', {
+						templateUrl: '/views/signup.html',
+						controller: 'SignupCtrl',
+						caseInsensitiveMatch: true
+					})
+					.otherwise({
+						redirectTo: '/'
+					})
+			});
+
+			app.controller("IndexCtrl", function($scope) {
+				$scope.loggedIn = function() {
+					if(window.localStorage.token)
+						return true;
+					else
+						return false;
+				}
+				$scope.logout = function() {
+					delete window.localStorage.token;
+					window.location = "/";
+				}
+			})
+		</script>
+	</head>
+
+	<body ng-app="interviewIn" ng-controller="IndexCtrl">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">
+						<span class="logo">
+							INTERVIEWin
+						</span>
+					</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+					  <!-- <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Old Assignments<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+						</ul>
+					  </li> -->
+
+					  <span ng-if="loggedIn()" ng-click="logout()">Logout</span>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div ng-view class="content">
+		</div>
+
+		<script src="/controllers/dashboardCtrl.js" ></script>
+		<script src="/controllers/homeCtrl.js" ></script>
+		<script src="/controllers/signupCtrl.js" ></script>
+		<script src="/controllers/loginCtrl.js" ></script>
+	</body>
+</html>

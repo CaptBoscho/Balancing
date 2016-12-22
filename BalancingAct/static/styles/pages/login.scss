@@ -1,0 +1,40 @@
+#login, #signup {
+    .infoTable {
+        margin-top: 20px;
+        border-radius: 4px;
+        border: 1px solid $sea-dark;
+
+        .header {
+            margin-left: -15px;
+            margin-right: -15px;
+            background-color: $sea-dark;
+            color: white;
+            border-bottom: 1px solid $sea-dark;
+            padding: 5px 10px;
+            font-size: 20px;
+        }
+
+        .info {
+            padding: 10px 0;
+            clear: both;
+
+            .alert {
+                margin-bottom: 10px;
+            }
+
+            .input-group {
+                margin: 10px 0;
+                width: 100%;
+
+                .input-group-addon {
+                    width: 150px;
+                }
+            }
+
+            .login {
+                float: right;
+                width: 150px;
+            }
+        }
+    }
+}

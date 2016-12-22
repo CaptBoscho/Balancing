@@ -1,0 +1,111 @@
+#home {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background: url(../images/landingBg-dark.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: rgba(0,0,0,0.5);
+    font-family: $header-font;
+
+    .top {
+        padding-top: 24px;
+        width: 100%;
+        height: 80px;
+
+        .left {
+            position: absolute;
+            left: 35px;
+        }
+
+        .right {
+            position: absolute;
+            right: 35px;
+        }
+
+        .logo {
+            font-size: 2em;
+            color: white;
+            cursor: default;
+            margin-top: 15px;
+        }
+
+        .login {
+            display: inline-block;
+            font-size: 1.2em;
+            font-weight: 300;
+            color: white;
+            padding: 5px 30px;
+            margin-top: 15px;
+
+            &:hover {
+                cursor: pointer;
+                color: $sea;
+                text-decoration: none;
+            }
+        }
+
+        .signup {
+            display: inline-block;
+            font-size: 1.2em;
+            font-weight: 300;
+            color: white;
+            border-radius: 30px;
+            border: 2px solid white;
+            padding: 5px 20px;
+            margin-top: 15px;
+
+            &:hover {
+                cursor: pointer;
+                color: $sea;
+                border-color: $sea;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .intro {
+        font-family: $body-font;
+        width: 500px;
+        position: absolute;
+        transform: translateY(-50%);
+        top: 45%;
+        left: 6em;
+        color: white;
+        font-weight: 200;
+
+        p {
+            font-size: 2.4em;
+            font-weight: 300;
+            color: white;
+            text-shadow: 1px 1px 5px #333;
+        }
+
+        .get-started {
+            font-size: 2.5em;
+            background-color: $sea;
+            padding: 0.3em 1.5em;
+            border-radius: 70px;
+            border: none;
+            margin: 0.5em auto;
+            display: inline-block;
+            outline: 0;
+            color: white;
+            font-weight: 500;
+
+            &:hover {
+                background-color: $sea-mid;
+                color: white;
+                text-decoration: none;
+            }
+
+            &:focus {
+                background-color: $sea-dark;
+            }
+        }
+    }
+}
